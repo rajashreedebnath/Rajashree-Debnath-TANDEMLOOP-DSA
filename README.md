@@ -1,7 +1,7 @@
 # Calculator and Multiples Counter
 
 ## Coding Language
-This project is implemented in **JavaScript (Node.js)**.
+This project is implemented in **JavaScript**.
 
 
 
@@ -16,7 +16,7 @@ This project includes:
 
 ## How to Run
 1. Make sure you have [Node.js](https://nodejs.org/) installed.
-2. Run the program using the command:
+2. Run the program using the live server:
 3. Follow on-screen prompts to provide input.
 
 
