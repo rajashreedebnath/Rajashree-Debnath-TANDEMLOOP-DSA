@@ -5,16 +5,6 @@
 
 
 
-
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-
-
 class Calculator {
     constructor(a, b, operation) {
         this.a = parseFloat(a);
@@ -22,43 +12,43 @@ class Calculator {
         this.operation = operation.toLowerCase();
     }
 
+    isValid() {
+        return !isNaN(this.a) && !isNaN(this.b);
+    }
+
     calculate() {
         switch (this.operation) {
             case "add":
-                console.log(`${this.a} + ${this.b} = `, this.a + this.b);
-                break;
-
+                return `${this.a} + ${this.b} = ${this.a + this.b}`;
             case "subtract":
-                console.log(`${this.a} - ${this.b} = `, this.a - this.b);
-                break;
-
+                return `${this.a} - ${this.b} = ${this.a - this.b}`;
             case "multiply":
-                console.log(`${this.a} * ${this.b} = `, this.a * this.b);
-                break;
-
+                return `${this.a} * ${this.b} = ${this.a * this.b}`;
             case "divide":
                 if (this.b === 0) {
-                    console.log(`Error: Division by zero!`);
-                } else {
-                    console.log(`${this.a} / ${this.b} = `, this.a / this.b);
+                    return "❌ Error: Division by zero!";
                 }
-                break;
-
+                return `${this.a} / ${this.b} = ${this.a / this.b}`;
             default:
-                console.log(`Error: Invalid operation!`);
+                alert("❌ Invalid operation. Use add, subtract, multiply, or divide.");
+                return runCalculator();
+
         }
     }
 }
 
+function runCalculator() {
+    let a = prompt("Enter the first number:");
+    let b = prompt("Enter the second number:");
+    let operation = prompt("Enter operation (add, subtract, multiply, divide):");
 
+    const calc = new Calculator(a, b, operation);
 
+    if (!calc.isValid()) {
+        alert("❌ Invalid number(s). Please try again.");
+        return runCalculator();
+    }
 
-rl.question("Enter the first number: ", (a) => {
-    rl.question("Enter the second number: ", (b) => {
-        rl.question("Enter the operation (add, subtract, multiply, divide): ", (operation) => {
-            const calc = new Calculator(a, b, operation);
-            calc.calculate();
-            rl.close();
-        });
-    });
-});
+    const result = calc.calculate();
+    alert("✅ Result: " + result);
+}

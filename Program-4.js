@@ -6,17 +6,20 @@
 
 
 
-const readline = require('readline');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+function countMultiples() {
 
+    let input = prompt("Enter numbers separated by commas (e.g. 1,2,8,9,12,15)");
 
+    if (!input) {
+        alert("❌ No input provided.");
+        return countMultiples();
+    }
 
+    const arr = input.split(',')
+        .map(s => parseInt(s.trim()))
+        .filter(n => !isNaN(n));
 
-function countMultiples(arr) {
     const result = {};
     for (let i = 1; i <= 9; i++) {
         result[i] = 0;
@@ -28,27 +31,10 @@ function countMultiples(arr) {
             }
         }
     }
-    return result;
+    let output = "✅\n";
+    for (let i = 1; i <= 9; i++) {
+        output += `${i}: ${result[i]}\n`;
+    }
+
+    alert(output);
 }
-
-
-function askInput() {
-    rl.question("Enter numbers separated by commas (e.g. 1,2,8,9): ", (input) => {
-
-        const arr = input.split(',')
-            .map(s => s.trim())
-            .map(Number)
-            .filter(n => !isNaN(n));
-
-        if (arr.length === 0) {
-            console.log("Please enter valid numbers.");
-            askInput();
-        } else {
-            const multiplesCount = countMultiples(arr);
-            console.log(multiplesCount);
-            rl.close();
-        }
-    });
-}
-
-askInput();

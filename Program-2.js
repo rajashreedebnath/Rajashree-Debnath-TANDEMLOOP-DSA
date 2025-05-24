@@ -10,41 +10,19 @@
 //     5) input a = x, then output : 1, 3, 5, 7, .......
 
 
+function generateOddSeries() {
+    let input = prompt("Enter a positive number:");
+    let a = parseInt(input);
 
-const readline = require('readline');
+    if (isNaN(a) || a <= 0) {
+        alert("❌ Please enter a valid positive integer.");
+        return generateOddSeries();
+    }
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-
-
-
-function generateOddSeries(a) {
-    const result = [];
+    let result = [];
     for (let i = 0; i < a; i++) {
         result.push(2 * i + 1);
     }
-    return result.join(', ');
+
+    alert("✅ Generated Series: " + result.join(', '));
 }
-
-
-
-
-function askForNumber() {
-    rl.question("Enter a number: ", (input) => {
-        const a = parseInt(input);
-
-        if (isNaN(a) || a <= 0) {
-            console.log("❌ Please enter a valid positive integer.");
-            askForNumber();
-        } else {
-            const series = generateOddSeries(a);
-            console.log("✅ Generated Series:", series);
-            rl.close();
-        }
-    });
-}
-
-askForNumber();

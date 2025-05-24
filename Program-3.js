@@ -13,42 +13,21 @@
 
 
 
-const readline = require('readline');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+function generateOddEvenSeries() {
+    let input = prompt("Enter a positive number:");
+    let a = parseInt(input);
 
+    if (isNaN(a) || a <= 0) {
+        alert("❌ Please enter a valid positive integer.");
+        return generateOddEvenSeries();
+    }
 
-
-
-
-function generateOddSeries(a) {
-    const count = a % 2 === 0 ? a - 1 : a;
-    const result = [];
+    count = a % 2 === 0 ? a - 1 : a;
+    let result = [];
     for (let i = 0; i < count; i++) {
         result.push(2 * i + 1);
     }
-    return result.join(', ');
+
+    alert("✅ Generated Series: " + result.join(', '));
 }
-
-
-
-
-function askForNumber() {
-    rl.question("Enter a number: ", (input) => {
-        const a = parseInt(input);
-
-        if (isNaN(a) || a <= 0) {
-            console.log("❌ Please enter a valid positive integer.");
-            askForNumber();
-        } else {
-            const series = generateOddSeries(a);
-            console.log("✅ Generated Series:", series);
-            rl.close();
-        }
-    });
-}
-
-askForNumber();
